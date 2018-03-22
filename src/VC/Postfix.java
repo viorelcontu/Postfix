@@ -22,19 +22,19 @@ public class Postfix {
         for (int j=0; j<input.length(); j++) {
             hand = input.charAt(j);
 
-            if (stack.isOperand(hand)) output += hand;
+            if (MathStack.isOperand(hand)) output += hand;
 
-            if (stack.isOperator(hand)) {
+            if (MathStack.isOperator(hand)) {
                 if (stack.isEmpty()) stack.push(hand); else {
 
                     while (!stack.isEmpty() && !stack.isParenthesis()) {
-                        if (stack.opPriority(hand) <= stack.opPriority()) output += stack.pull(); else break;
+                        if (MathStack.opPriority(hand) <= stack.opPriority()) output += stack.pull(); else break;
                     }
                     stack.push(hand);
                 }
             }
 
-            if (stack.isParenthesis(hand)) {
+            if (MathStack.isParenthesis(hand)) {
                 if (hand == '(') stack.push(hand); else {
                     while (!stack.isParenthesis()) {
                         output += stack.pull();
